@@ -12,6 +12,6 @@ public class PermissionController {
 
 	@GetMapping(value="/permission")
 	public String getAllPermissions() {
-		return "Welcome IDM";
+		return "Welcome to permissions";
 	}
 }
