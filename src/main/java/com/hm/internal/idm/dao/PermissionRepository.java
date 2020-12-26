@@ -6,4 +6,6 @@ import com.hm.internal.idm.entity.Permission;
 
 public interface PermissionRepository extends JpaRepository<Permission, Long>{
 
+	void findByFeature(String feature);
+
 }

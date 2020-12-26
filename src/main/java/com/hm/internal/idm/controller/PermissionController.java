@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hm.internal.idm.service.PermissionService;
@@ -23,4 +24,13 @@ public class PermissionController {
 		 response=new ResponseEntity<Object>(object, HttpStatus.OK);
 		 return response;
 	}
+	
+	@GetMapping(value="/permission/search")
+	public ResponseEntity<Object>  getAllPermissionsByFeature(@RequestParam String feature) {
+		ResponseEntity<Object> response=null;
+		 Object object= permissionService.getAllPermissionByFeature(feature);
+		 response=new ResponseEntity<Object>(object, HttpStatus.OK);
+		 return response;
+	}
+	
 }
