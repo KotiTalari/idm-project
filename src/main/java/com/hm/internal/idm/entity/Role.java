@@ -1,5 +1,7 @@
 package com.hm.internal.idm.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ public class Role {
 	@Column(name = "ROLE_ID_PK")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private int id;
+	private Long id;
 	@Column(name = "NAME")
     private String name;
     @Column(name = "DESCRIPTION")
@@ -23,11 +25,30 @@ public class Role {
     private Character status;
     @Column(name = "ENTERPRISE_CODE")
     private String enterpriseCode;
-	public int getId() {
+    @Column(name = "CREATE_DATE")
+    private Timestamp createdAt;
+
+    @Column(name = "LAST_UPDATE_DATE")
+    private Timestamp updatedAt;
+    
+
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 	public String getName() {
 		return name;

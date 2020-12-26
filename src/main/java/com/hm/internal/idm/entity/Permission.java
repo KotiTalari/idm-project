@@ -1,12 +1,14 @@
 package com.hm.internal.idm.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name = "PERMISSION")
@@ -18,10 +20,10 @@ public class Permission implements Serializable {
 	 */
 	private static final long serialVersionUID = 5220217551871879903L;
 
-	 @Id
+	@Id
 	@Column(name = "P_ID_PK")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int  id;
+	private Long  id;
 	@Column(name = "NAME")
 	private String name;
 	@Column(name = "DESCRIPTION")
@@ -32,12 +34,35 @@ public class Permission implements Serializable {
 	private Character status;
 	@Column(name = "TYPE")
 	private Boolean type;
+	@Column(name = "CREATE_DATE")
+    private Timestamp createdAt;
+
+    @Column(name = "LAST_UPDATE_DATE")
+    private Timestamp updatedAt;
 	
-	public int getId() {
+	
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public String getName() {
 		return name;

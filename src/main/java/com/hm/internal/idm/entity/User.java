@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Table;
+@Table(name = "USER")
+@Entity
 public class User implements Serializable{
 
 	/**
@@ -15,11 +18,11 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = 7788053784136077793L;
 
-	  
+	
 	@Column(name = "USER_ID_PK")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private int  id;
+	private Long  id;
 	@Column(name = "NAME")
     private String name;
     @Column(name = "USERNAME")
@@ -48,11 +51,30 @@ public class User implements Serializable{
     private Timestamp passwordExpiryDate;
     @Column(name = "LAST_LOGIN_DATE")
     private Timestamp lastLoginDate;
-	public int getId() {
+    @Column(name = "CREATE_DATE")
+    private Timestamp createdAt;
+
+    @Column(name = "LAST_UPDATE_DATE")
+    private Timestamp updatedAt;
+	
+    
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 	public String getName() {
 		return name;
