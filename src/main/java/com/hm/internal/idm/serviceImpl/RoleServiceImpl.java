@@ -17,8 +17,7 @@ public class RoleServiceImpl implements RoleService {
 	
 	@Override
 	public List<Role> getAllRoles() {
-		// TODO Auto-generated method stub
-		return null;
+		return roleReo.findAll();
 	}
 
 	@Override
@@ -29,5 +28,13 @@ public class RoleServiceImpl implements RoleService {
 		else
 		return false;
 	}
+
+	@Override
+	public Boolean deleteRole(int id) {
+		roleReo.deleteById((long) id);
+		return true;
+	}
+
+	
 
 }
