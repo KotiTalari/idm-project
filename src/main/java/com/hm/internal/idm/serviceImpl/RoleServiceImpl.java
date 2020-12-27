@@ -3,11 +3,13 @@ package com.hm.internal.idm.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hm.internal.idm.dao.RoleRepository;
 import com.hm.internal.idm.entity.Role;
 import com.hm.internal.idm.service.RoleService;
 
+@Service
 public class RoleServiceImpl implements RoleService {
 
 	@Autowired
