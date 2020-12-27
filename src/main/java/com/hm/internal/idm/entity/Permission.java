@@ -5,11 +5,14 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 @Table(name = "PERMISSION")
 @Entity
@@ -40,7 +43,9 @@ public class Permission implements Serializable {
     @Column(name = "LAST_UPDATE_DATE")
     private Timestamp updatedAt;
 	
-	
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "ROLE_ID_PK", nullable = false)
+	private Role role;
 	
 	
 	public Long getId() {

@@ -1,13 +1,18 @@
 package com.hm.internal.idm.entity;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "ROLE")
@@ -31,6 +36,8 @@ public class Role {
     @Column(name = "LAST_UPDATE_DATE")
     private Timestamp updatedAt;
     
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Permission> permissions;
 
 	public Long getId() {
 		return id;
