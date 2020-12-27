@@ -8,4 +8,5 @@ public interface RoleService {
 
 	
 	public List<Role> getAllRoles();
+	public Boolean createRole(Role roleObject);
 }
