@@ -1,15 +1,19 @@
 package com.hm.internal.idm.serviceImpl;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hm.internal.idm.dao.PermissionRepository;
 import com.hm.internal.idm.dao.RoleRepository;
 import com.hm.internal.idm.dao.UserRepository;
+import com.hm.internal.idm.entity.Permission;
 import com.hm.internal.idm.entity.Role;
 import com.hm.internal.idm.entity.User;
 import com.hm.internal.idm.service.PermissionService;
@@ -17,6 +21,8 @@ import com.hm.internal.idm.service.PermissionService;
 @Service
 public class PermissionServiceImpl implements PermissionService {
 
+	  Logger logger = LoggerFactory.getLogger(PermissionServiceImpl.class);
+	 Map<Object, Object> response ;
 	@Autowired
 	RoleRepository roleRepo;
 	
@@ -28,11 +34,11 @@ public class PermissionServiceImpl implements PermissionService {
 	
 	@Override
 	public Object getAllPermission() {
-		
+		logger.info("in side getAllPermission function");
       List<Role> users=roleRepo.findAll();
       List<User> roles= userRepo.findAll();
       
-      Map<Object, Object> response = new HashMap<>();
+      response = new LinkedHashMap<>();
       response.put("users", users);
       response.put("roles", roles);
       return response;
@@ -41,9 +47,11 @@ public class PermissionServiceImpl implements PermissionService {
 	
 	@Override
 	public Object getAllPermissionByFeature(String feature) {
-		
-		permissionRepo.findByFeature(feature);
-		return null;
+		logger.info("in side getAllPermissionByFeature function");
+	List<Permission> perm=	permissionRepo.findByFeature(feature);
+	  response = new LinkedHashMap<>();
+	  response.put("permissions", perm);
+		return response;
 	}
 
 }
