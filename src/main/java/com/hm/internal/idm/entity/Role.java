@@ -26,7 +26,13 @@ public class Role {
     private String name;
     @Column(name = "DESCRIPTION")
     private String description;
-    @Column(name = "STATUS")
+    public Set<Permission> getPermissions() {
+		return permissions;
+	}
+	public void setPermissions(Set<Permission> permissions) {
+		this.permissions = permissions;
+	}
+	@Column(name = "STATUS")
     private Character status;
     @Column(name = "ENTERPRISE_CODE")
     private String enterpriseCode;
