@@ -27,7 +27,8 @@ public class PermissionController {
 	
 	@GetMapping(value="/permission/search")
 	public ResponseEntity<Object>  getAllPermissionsByFeature(@RequestParam String feature) {
-		ResponseEntity<Object> response=null;
+		
+		 ResponseEntity<Object> response=null;
 		 Object object= permissionService.getAllPermissionByFeature(feature);
 		 response=new ResponseEntity<Object>(object, HttpStatus.OK);
 		 return response;

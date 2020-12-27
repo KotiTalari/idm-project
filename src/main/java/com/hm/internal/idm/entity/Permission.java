@@ -2,7 +2,9 @@ package com.hm.internal.idm.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Table(name = "PERMISSION")
@@ -42,23 +48,28 @@ public class Permission implements Serializable {
 
     @Column(name = "LAST_UPDATE_DATE")
     private Timestamp updatedAt;
-	
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "ROLE_ID_PK", nullable = false)
-	private Role role;
-	
+	 
+    
+    
+    @JsonBackReference
+    @ManyToMany(mappedBy = "permissions" , fetch = FetchType.LAZY ,targetEntity = Role.class,cascade = CascadeType.ALL)
+    private Set<Role> roles;
+	//private Role role;
+	 
 	
 	public Long getId() {
 		return id;
 	}
 	
-//	public Role getRole() {
-//		return role;
-//	}
-	
-	public void setRole(Role role) {
-		this.role = role;
+	public Set<Role> getRoles() {
+		return roles;
 	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -112,7 +123,10 @@ public class Permission implements Serializable {
 		return "Permission [id=" + id + ", name=" + name + ", description=" + description + ", feature=" + feature
 				+ ", status=" + status + ", type=" + type + "]";
 	}
+
 	
+
+		
 	
 	
 

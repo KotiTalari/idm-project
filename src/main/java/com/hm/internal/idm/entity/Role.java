@@ -10,8 +10,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -26,12 +32,8 @@ public class Role {
     private String name;
     @Column(name = "DESCRIPTION")
     private String description;
-    public Set<Permission> getPermissions() {
-		return permissions;
-	}
-	public void setPermissions(Set<Permission> permissions) {
-		this.permissions = permissions;
-	}
+    
+   
 	@Column(name = "STATUS")
     private Character status;
     @Column(name = "ENTERPRISE_CODE")
@@ -42,8 +44,20 @@ public class Role {
     @Column(name = "LAST_UPDATE_DATE")
     private Timestamp updatedAt;
     
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    
+  
+    @ManyToMany(cascade = CascadeType.ALL, targetEntity = Permission.class )
+    @JoinTable(name = "role_permission", joinColumns = {@JoinColumn(name = "ROLE_ID_PK")}, inverseJoinColumns = {@JoinColumn(name = "P_ID_PK")})
 	private Set<Permission> permissions;
+    
+    @JsonIgnore
+    public Set<Permission> getPermissions() {
+		return permissions;
+	}
+    @JsonIgnore
+	public void setPermissions(Set<Permission> permissions) {
+		this.permissions = permissions;
+	}
 
 	public Long getId() {
 		return id;
@@ -92,7 +106,10 @@ public class Role {
 		return "Role [id=" + id + ", name=" + name + ", description=" + description + ", status=" + status
 				+ ", enterpriseCode=" + enterpriseCode + "]";
 	}
-
+	
+	
+	
+	
     
 	
 }
