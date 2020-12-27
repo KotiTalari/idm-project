@@ -35,8 +35,8 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public Object getAllPermission() {
 		logger.info("in side getAllPermission function");
-      List<Role> users=roleRepo.findAll();
-      List<User> roles= userRepo.findAll();
+      List<Role> roles =roleRepo.findAll();
+      List<User> users = userRepo.findAll();
       
       response = new LinkedHashMap<>();
       response.put("users", users);
